@@ -19,6 +19,33 @@ function writeAnswers(e) {
 			 location.reload(true);
 		 }
 	 }
-	 
 	 request.send(params);
 }
+
+
+var deleteList = document.querySelectorAll('.deleteBtn');
+for ( var j=0 ; j < deleteList.length ; j++) {
+	deleteList[j].addEventListener('click', deleteAnswer, false);
+}
+
+function deleteAnswer(e) {
+	 e.preventDefault();
+	 var url = "/api/deleteanswer.next";
+	 var answerId = e.currentTarget.attributes['data-answerId'].value;
+	 var questionId = e.currentTarget.attributes['data-questionId'].value;
+	 var params = "questionId=" + questionId + "&answerId=" + answerId;
+	 
+	 var request = new XMLHttpRequest();
+	 request.open("POST", url, true);
+	 request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	 
+	 request.onreadystatechange = function() {
+		 if(request.readyState == 4 && request.status == 200) {
+			 location.reload(true);
+		 }
+	 }
+	 request.send(params);
+}
+
+
+
