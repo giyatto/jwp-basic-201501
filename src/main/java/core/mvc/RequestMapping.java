@@ -3,6 +3,7 @@ package core.mvc;
 import java.util.HashMap;
 import java.util.Map;
 
+import next.controller.JsonController;
 import next.controller.ListController;
 import next.controller.ShowController;
 
@@ -20,6 +21,8 @@ public class RequestMapping {
 		mappings.put("/save.next", new InsertQuestionController());
 		mappings.put("/api/addanswer.next", new InsertAnswerController());
 		mappings.put("/api/deleteanswer.next", new DeleteAnswerController());
+		mappings.put("/api/list.next", new JsonController());
+		
 		
 		logger.info("Initialized Request Mapping!");
 	}
