@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
+import next.dao.SingletonDao;
 import next.model.Answer;
 
 import org.slf4j.Logger;
@@ -15,8 +16,8 @@ import core.utils.ServletRequestUtils;
 public class InsertAnswerController extends AbstractController {
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
-	private AnswerDao answerDao = new AnswerDao();
-	private QuestionDao questionDao = new QuestionDao();
+	AnswerDao answerDao = SingletonDao.getAnswerDao();
+	QuestionDao questionDao = SingletonDao.getQuestionDao();
 	
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
