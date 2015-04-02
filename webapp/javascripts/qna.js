@@ -33,15 +33,24 @@ function deleteAnswer(e) {
 	 var url = "/api/deleteanswer.next";
 	 var answerId = e.currentTarget.attributes['data-answerId'].value;
 	 var questionId = e.currentTarget.attributes['data-questionId'].value;
+	 var commentNo = e.currentTarget.attributes['data-commentNo'].value;
 	 var params = "questionId=" + questionId + "&answerId=" + answerId;
+	 
+	 var parentNode = document.getElementById("comments")
+	 var childNode = document.getElementById("comment-"+commentNo);
+	 
+	 var el = document.querySelector(".comments > h3");
+	 var commentCnt = el.innerHTML.split(" : ")[1]-1;
 	 
 	 var request = new XMLHttpRequest();
 	 request.open("POST", url, true);
 	 request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	 
+	 
 	 request.onreadystatechange = function() {
 		 if(request.readyState == 4 && request.status == 200) {
-			 location.reload(true);
+			 el.innerHTML = "댓글 수 : " + commentCnt;
+			 parentNode.removeChild(childNode);
 		 }
 	 }
 	 request.send(params);

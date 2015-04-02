@@ -52,11 +52,10 @@
 		</div>
 
 		<!-- comments start -->
-		<div class="comments">
+		<div id="comments" class="comments">
 			<h3>댓글 수 : ${question.countOfComment}</h3>
-
-			<c:forEach items="${answers}" var="each">
-				<div class="comment">
+			<c:forEach items="${answers}" var="each" varStatus="status">
+				<div id="comment-${status.count}" class="comment">
 					<div class="comment-metadata">
 						<span class="comment-author">by ${each.writer},</span> <span
 							class="comment-date">${each.createdDate}</span>
@@ -66,7 +65,7 @@
 						${each.contents}
 					</div>
 					<div class="comment-delete">
-						<a href="#" class="deleteBtn" data-answerId="${each.answerId}" data-questionId="${question.questionId}">
+						<a href="#" class="deleteBtn" data-answerId="${each.answerId}" data-questionId="${question.questionId}" data-commentNo="${status.count}">
 							<input type="submit" value="삭제">
 						</a>
 					</div>
