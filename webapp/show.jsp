@@ -29,7 +29,12 @@
 				${nf:hbr(question.contents)}
 			</div>
 		</div>
-
+		<div>
+		<form action="/delete.next" method="post">
+			<input type="hidden" name="questionId"	value="${question.questionId}">
+			<input type="submit" value="삭제">
+		</form>
+		</div>
 		<br /> <a href="/list.next">목록으로</a>
 
 		<h3>답변</h3>

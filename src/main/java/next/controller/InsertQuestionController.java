@@ -1,17 +1,17 @@
-package core.mvc;
+package next.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import next.dao.AnswerDao;
 import next.dao.QuestionDao;
-import next.dao.SingletonDao;
 import next.model.Question;
+import core.mvc.AbstractController;
+import core.mvc.ModelAndView;
 import core.utils.ServletRequestUtils;
 
 public class InsertQuestionController extends AbstractController {
 
-	QuestionDao questionDao = SingletonDao.getQuestionDao();
+	private QuestionDao questionDao = QuestionDao.getInstance();
 	
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

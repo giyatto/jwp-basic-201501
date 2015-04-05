@@ -28,8 +28,7 @@
 	  </div>
 	</c:forEach>
 	</div>
-
-  	<br /> <a href="/form.next">질문하기</a> 
+		<a href="form.next"><input type="submit" value="질문하기"></a>
     </div>
 </body>
 </html>
