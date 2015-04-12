@@ -1,26 +1,29 @@
 package next.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Question {
 	private long questionId;
-	
+
 	private String writer;
-	
+
 	private String title;
-	
+
 	private String contents;
-	
+
 	private Date createdDate;
-	
+
 	private int countOfComment;
-	
+
+	private List<Answer> answers; // QnaService의 delete 메서드 로직의 대부분을 Question이
+								  // 책임지도록 수정.
+
 	public Question(String writer, String title, String contents) {
 		this(0, writer, title, contents, new Date(), 0);
-	}	
-	
-	public Question(long questionId, String writer, String title, String contents,
-			Date createdDate, int countOfComment) {
+	}
+
+	public Question(long questionId, String writer, String title, String contents, Date createdDate, int countOfComment) {
 		this.questionId = questionId;
 		this.writer = writer;
 		this.title = title;
@@ -32,7 +35,7 @@ public class Question {
 	public long getQuestionId() {
 		return questionId;
 	}
-	
+
 	public String getWriter() {
 		return writer;
 	}
@@ -48,7 +51,7 @@ public class Question {
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-	
+
 	public long getTimeFromCreateDate() {
 		return this.createdDate.getTime();
 	}
@@ -57,12 +60,35 @@ public class Question {
 		return countOfComment;
 	}
 
+	// QnaService의 delete 메서드 로직의 대부분을 Question이 책임지도록 수정.
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public boolean canDelete() {
+
+		if (answers == null || answers.isEmpty()) {
+			return false;
+		}
+
+		for (Answer answer : answers) {
+			if (!writer.equals(answer.getWriter())) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	@Override
 	public String toString() {
-		return "Question [questionId=" + questionId + ", writer=" + writer
-				+ ", title=" + title + ", contents=" + contents
-				+ ", createdDate=" + createdDate + ", countOfComment="
-				+ countOfComment + "]";
+		return "Question [questionId=" + questionId + ", writer=" + writer + ", title=" + title + ", contents="
+		        + contents + ", createdDate=" + createdDate + ", countOfComment=" + countOfComment + "]";
 	}
 
 	@Override

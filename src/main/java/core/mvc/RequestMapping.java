@@ -30,12 +30,11 @@ public class RequestMapping {
 	
 	public void initMapping() {
 		
-		
 		DataSource dataSource = ConnectionManager.getDataSource();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		QuestionDao questionDao = new JdbcQuestionDao(jdbcTemplate);
 		AnswerDao answerDao = new JdbcAnswerDao(jdbcTemplate);
+		QuestionDao questionDao = new JdbcQuestionDao(jdbcTemplate, answerDao);
 		
 		QnaService qnaService = new QnaService(answerDao, questionDao);
 		
@@ -47,7 +46,6 @@ public class RequestMapping {
 		mappings.put("/api/addanswer.next", new InsertAnswerController(answerDao, questionDao));
 		mappings.put("/api/deleteanswer.next", new DeleteAnswerController(answerDao, questionDao));
 		mappings.put("/api/list.next", new JsonController(questionDao));
-		
 		
 		logger.info("Initialized Request Mapping!");
 	}
