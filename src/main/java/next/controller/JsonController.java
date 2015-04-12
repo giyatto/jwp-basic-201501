@@ -13,7 +13,12 @@ import core.mvc.ModelAndView;
 
 public class JsonController extends AbstractController {
 
-	private QuestionDao questionDao = QuestionDao.getInstance();
+	private QuestionDao questionDao;
+	
+	public JsonController(QuestionDao questionDao){
+		this.questionDao = questionDao;
+	}
+	
 	
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

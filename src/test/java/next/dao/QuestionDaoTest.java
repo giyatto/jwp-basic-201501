@@ -15,6 +15,9 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import core.jdbc.ConnectionManager;
 
 public class QuestionDaoTest {
+	
+	private QuestionDao dut;
+	
 	@Before
 	public void setup() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
@@ -25,7 +28,6 @@ public class QuestionDaoTest {
 	@Test
 	public void crud() throws Exception {
 		Question expected = new Question("자바지기", "title", "contents");
-		QuestionDao dut = QuestionDao.getInstance();
 		dut.insert(expected);
 		
 		List<Question> questions = dut.findAll();

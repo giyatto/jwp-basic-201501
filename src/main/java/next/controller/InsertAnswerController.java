@@ -18,8 +18,14 @@ import core.utils.ServletRequestUtils;
 public class InsertAnswerController extends AbstractController {
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
-	private AnswerDao answerDao = AnswerDao.getInstance();
-	private QuestionDao questionDao = QuestionDao.getInstance();
+	private AnswerDao answerDao;
+	private QuestionDao questionDao;
+	
+	public InsertAnswerController(AnswerDao answerDao, QuestionDao questionDao){
+		super();
+		this.answerDao = answerDao;
+		this.questionDao = questionDao;
+	}
 	
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

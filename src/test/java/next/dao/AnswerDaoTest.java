@@ -15,6 +15,9 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import core.jdbc.ConnectionManager;
 
 public class AnswerDaoTest {
+	
+	private AnswerDao dut;
+	
 	@Before
 	public void setup() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
@@ -26,7 +29,6 @@ public class AnswerDaoTest {
 	public void crud() throws Exception {
 		long questionId = 1L;
 		Answer expected = new Answer("javajigi", "answer contents", questionId);
-		AnswerDao dut = AnswerDao.getInstance();
 		dut.insert(expected);
 		
 		List<Answer> answers = dut.findAllByQuestionId(questionId);

@@ -11,17 +11,21 @@ import core.utils.ServletRequestUtils;
 
 public class InsertQuestionController extends AbstractController {
 
-	private QuestionDao questionDao = QuestionDao.getInstance();
-	
+	private QuestionDao questionDao;
+
+	public InsertQuestionController(QuestionDao questionDao) {
+		this.questionDao = questionDao;
+	}
+
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+
 		String writer = ServletRequestUtils.getRequiredStringParameter(request, "writer");
 		String title = ServletRequestUtils.getRequiredStringParameter(request, "title");
 		String contents = ServletRequestUtils.getRequiredStringParameter(request, "contents");
-		
+
 		questionDao.insert(new Question(writer, title, contents));
-		
+
 		ModelAndView mav = jstlView("redirect:/list.next");
 		return mav;
 	}

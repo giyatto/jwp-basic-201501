@@ -18,8 +18,14 @@ public class DeleteAnswerController extends AbstractController {
 
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 	
-	private AnswerDao answerDao = AnswerDao.getInstance();
-	private QuestionDao questionDao = QuestionDao.getInstance();
+	private AnswerDao answerDao;
+	private QuestionDao questionDao;
+	
+	public DeleteAnswerController(AnswerDao answerDao, QuestionDao questionDao){
+		super();
+		this.answerDao = answerDao;
+		this.questionDao = questionDao;
+	}
 	
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -29,7 +35,7 @@ public class DeleteAnswerController extends AbstractController {
 		
 		logger.debug("questionId : {}, answerId : {}", questionId, answerId);
 		
-		answerDao.delete(questionId, answerId);
+		answerDao.delete(answerId);
 		ModelAndView mav = jstlView("redirect:/show.next?questionId="+questionId);
 		questionDao.updateCountOfComment(questionDao.findById(questionId), "minus");
 		return mav;

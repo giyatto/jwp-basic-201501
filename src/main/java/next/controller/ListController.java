@@ -11,7 +11,12 @@ import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 
 public class ListController extends AbstractController {
-	private QuestionDao questionDao = QuestionDao.getInstance();
+
+	private QuestionDao questionDao;
+	
+	public ListController(QuestionDao questionDao){
+		this.questionDao = questionDao;
+	}
 	
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
