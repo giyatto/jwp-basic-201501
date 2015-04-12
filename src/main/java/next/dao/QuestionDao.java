@@ -14,5 +14,6 @@ public interface QuestionDao {
 
 	void delete(long questionId);
 
-	void updateCountOfComment(Question question, String operator);
+	void updateCommentCount(long questionId);
+	
 }

@@ -38,7 +38,7 @@ public class InsertAnswerController extends AbstractController {
 		
 		answerDao.insert(new Answer(writer, contents,questionId));
 		ModelAndView mav = jstlView("redirect:/show.next?questionId="+questionId);
-		questionDao.updateCountOfComment(questionDao.findById(questionId), "plus");
+		questionDao.updateCommentCount(questionId);
 		return mav;
 	}
 }

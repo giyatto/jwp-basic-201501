@@ -37,7 +37,7 @@ public class DeleteAnswerController extends AbstractController {
 		
 		answerDao.delete(answerId);
 		ModelAndView mav = jstlView("redirect:/show.next?questionId="+questionId);
-		questionDao.updateCountOfComment(questionDao.findById(questionId), "minus");
+		questionDao.updateCommentCount(questionId);
 		return mav;
 	}
 }

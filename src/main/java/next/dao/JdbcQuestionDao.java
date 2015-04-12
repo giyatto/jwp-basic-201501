@@ -79,16 +79,11 @@ public class JdbcQuestionDao implements QuestionDao {
 	 * @see next.dao.QDao#updateCommentCount(long)
 	 */
 	@Override
-	public void updateCountOfComment(Question question, String operator){
-		String sql = "UPDATE QUESTIONS set countOfComment=? where questionId=?";
-		int countOfComment = question.getCountOfComment();
-		if(operator.equals("plus")){
-			countOfComment++;
-		}else{
-			countOfComment--;
-		}
-		jdbcTemplate.update(sql, countOfComment, question.getQuestionId());
+	public void updateCommentCount(long questionId) {
+		String sql = "UPDATE QUESTIONS set countOfComment = countOfComment + 1 WHERE questionId = ?";
+		jdbcTemplate.update(sql, questionId);
 	}
+
 
 	/* (non-Javadoc)
 	 * @see next.dao.QDao#delete(long)
