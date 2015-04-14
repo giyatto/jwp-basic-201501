@@ -43,5 +43,4 @@ public class MockQuestionDao implements QuestionDao {
 		}
 		return question;
 	}
-	
 }
